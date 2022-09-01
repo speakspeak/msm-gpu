@@ -6,12 +6,12 @@
 #define __JACOBIAN_T_HPP__
 
 #ifndef __CUDA_ARCH__
-# undef  __host__
-# define __host__
-# undef  __device__
-# define __device__
-# undef  __noinline__
-# define __noinline__
+#undef  __host__
+#define __host__
+#undef  __device__
+#define __device__
+#undef  __noinline__
+#define __noinline__
 #endif
 
 template<class field_t> class jacobian_t {

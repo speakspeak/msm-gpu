@@ -22,14 +22,23 @@ pub struct MultiScalarMultContext {
 
 #[cfg_attr(feature = "quiet", allow(improper_ctypes))]
 extern "C" {
-    fn mult_pippenger_init(
+    fn mult_pippenger_faster_init(
         context: *mut MultiScalarMultContext,
         points_with_infinity: *const G1Affine,
         npoints: usize,
         ffi_affine_sz: usize,
     ) -> cuda::Error;
-    
-    fn mult_pippenger_inf(
+
+    // fn mult_pippenger_init(
+    //     context: *mut MultiScalarMultContext,
+    //     points_with_infinity: *const G1Affine,
+    //     npoints: usize,
+    //     ffi_affine_sz: usize,
+    // ) -> cuda::Error;
+
+    // fn mult_pippenger_faster_inf2();
+
+    fn mult_pippenger_faster_inf(
         context: *mut MultiScalarMultContext,
         out: *mut u64,
         points_with_infinity: *const G1Affine,
@@ -38,6 +47,16 @@ extern "C" {
         scalars: *const Fr,
         ffi_affine_sz: usize,
     ) -> cuda::Error;
+    
+    // fn mult_pippenger_inf(
+    //     context: *mut MultiScalarMultContext,
+    //     out: *mut u64,
+    //     points_with_infinity: *const G1Affine,
+    //     npoints: usize,
+    //     batch_size: usize,
+    //     scalars: *const Fr,
+    //     ffi_affine_sz: usize,
+    // ) -> cuda::Error;
 }
 
 pub fn multi_scalar_mult_init<G: AffineCurve>(
@@ -48,7 +67,7 @@ pub fn multi_scalar_mult_init<G: AffineCurve>(
     };
         
     let err = unsafe {
-        mult_pippenger_init(
+        mult_pippenger_faster_init(
             &mut ret,
             points as *const _ as *const G1Affine,
             points.len(),
@@ -80,8 +99,10 @@ pub fn multi_scalar_mult<G: AffineCurve>(
         let result_ptr = 
             &mut *(&mut ret as *mut Vec<G::Projective>
                    as *mut Vec<u64>);
+        
+        // mult_pippenger_faster_inf2();
 
-        mult_pippenger_inf(
+        mult_pippenger_faster_inf(
             context,
             result_ptr.as_mut_ptr(),
             points as *const _ as *const G1Affine,

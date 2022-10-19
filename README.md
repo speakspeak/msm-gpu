@@ -20,7 +20,7 @@ If there are any questions about this library, please contact Tao Lu: lutaocc202
 
 ## Make MSM faster
 
-Here, we use a new faster parallel Pippenger-based MSM algorithm, which is equivalent to the one from our paper "cuZK: Accelerating Zero-Knowledge Proof with A Faster Parallel Multi-Scalar Multiplication Algorithm on GPUs". The full version of this paper will be published soon.
+Here, we use a new faster parallel Pippenger-based MSM algorithm, which is equivalent to the one from our paper "cuZK: Accelerating Zero-Knowledge Proof with A Faster Parallel Multi-Scalar Multiplication Algorithm on GPUs". The full version of this paper can be downloaded [here](https://eprint.iacr.org/2022/1321).
 
 Details of our MSM implementation are described [here](./doc.md) (doc.md).  
 

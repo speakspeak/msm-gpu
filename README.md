@@ -54,8 +54,8 @@ rustup install stable
 After that, use cargo, the standard Rust build tool, to build the libraries:
 
 ```
-git clone https://github.com/speakspeak/zprize-msm-gpu.git
-cd zprize-msm-gpu
+git clone https://github.com/speakspeak/msm-gpu.git
+cd msm-gpu
 cargo build --release
 ```
 
